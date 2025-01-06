@@ -14,6 +14,10 @@ class ArticleCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return
+        [
+            'title'=>['required','min:3','max:20'],
+            'caption'=>['required'],
+        ];
     }
 }

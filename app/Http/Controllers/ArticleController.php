@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ArticleUpdateRequest;
 use App\Http\Requests\storeArticleRequest;
 use App\Http\Resources\ArticleResource;
+use App\Http\Resources\ArticleUpdateResource;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -72,5 +74,22 @@ class ArticleController extends Controller
                 ]
             );
         }
+    }
+
+    public function update(ArticleUpdateRequest $articleUpdateRequest , Article $article)
+    {
+        $article->update($articleUpdateRequest->all());
+        return response()->json([
+            "message" => "اطلاعات مقاله موردنظر با موفقیت بروز رسانی شد",
+            "data" => new ArticleUpdateResource($article)
+        ], 200);
+    }
+
+    public function delete(Article $article)
+    {
+        $article->delete();
+        return response()->json([
+            "message" => "مقاله موردنظر حذف شد",
+        ], 200);
     }
 }
