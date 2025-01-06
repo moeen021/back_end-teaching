@@ -21,8 +21,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 */
 Route::get('article/{article:id}/show',[\App\Http\Controllers\ArticleController::class,'show']);
 Route::get('article/list',[\App\Http\Controllers\ArticleController::class,'showlist']);
+Route::post('article/store',[\App\Http\Controllers\ArticleController::class,'StoreArticle']);
+Route::put('article/{article}/update' , [\App\Http\Controllers\ArticleController::class,'update']);
+Route::delete('article/{article}/delete', [\App\Http\Controllers\ArticleController::class,'delete']);
+Route::post('transportation/store',[\App\Http\Controllers\TransportationController::class,'StoreTransportation']);
+Route::get('transportation/{transportation}/show',[\App\Http\Controllers\TransportationController::class,'show']);
+Route::post('auth/check/user/exist',[\App\Http\Controllers\User\UserController::class,'ChkUser']);
+Route::post('auth/check/user/otp',[\App\Http\Controllers\User\UserController::class,'ChkOtp']);
+Route::post('auth/user/store',[\App\Http\Controllers\User\UserController::class,'store']);
+
 Route::middleware('auth:sanctum')->group( function () {
 
-    Route::post('article/store',[\App\Http\Controllers\ArticleController::class,'StoreArticle']);
-
+    Route::get('user/{user}/info',[\App\Http\Controllers\User\UserController::class,'info_user']);
 });
